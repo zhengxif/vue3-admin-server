@@ -18,6 +18,7 @@ router.get('/test', async ctx => {
  * /auth/register
  */
 router.post('/register', async ctx => {
+  // @ts-ignore
   ctx.body = await registerController(ctx.request.body)
 })
 
@@ -26,6 +27,7 @@ router.post('/register', async ctx => {
  * /auth/login
  */
 router.post('/login', async ctx => {
+  // @ts-ignore
   const { username, password } = ctx.request.body
   ctx.body = await loginController({ username, password })
 })
@@ -36,6 +38,7 @@ router.post('/login', async ctx => {
 */
 
 router.post('/info', async ctx => {
+  // @ts-ignore
   const token = ctx.header.authorization || ctx.request.body.token
   ctx.body = await userInfoController(token)
 })

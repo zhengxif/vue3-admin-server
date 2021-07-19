@@ -16,6 +16,7 @@ const router = new Router({
 * post /api/access/menu
 */
 router.post('/menu', async (ctx) => {
+  // @ts-ignore
   ctx.body = await addAccessController(ctx.request.body)
 })
 
@@ -42,6 +43,7 @@ router.delete('/menu/:id', async (ctx) => {
 */
 router.put('/menu/:id', async (ctx) => {
   const { id } = ctx.params
+  // @ts-ignore
   ctx.body = await updateAccessController(Number(id), ctx.request.body)
 })
 
@@ -50,6 +52,7 @@ router.put('/menu/:id', async (ctx) => {
 * patch /api/access/menu/update
 */
 router.patch('/menu/update', async (ctx) => {
+  // @ts-ignore
   const { access } = ctx.request.body
   ctx.body = await updateBulkAccessController(access)
 })

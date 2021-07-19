@@ -15,6 +15,7 @@ const router = new Router({
 */
 router.post('/:id', async ctx => {
   const { id } = ctx.params
+  // @ts-ignore
   const { access } = ctx.request.body
   ctx.body = await addRoleAccessController(Number(id), access)
 })
@@ -29,6 +30,7 @@ router.get('/:id', async ctx => {
 })
 
 router.post('/role/access', async ctx => {
+  // @ts-ignore
   const { roles } = ctx.request.body
   const ids = (roles as string[]).map(Number)
   ctx.body = await getAccessByRolesController(ids)

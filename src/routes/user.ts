@@ -31,6 +31,7 @@ router.get('/', async ctx => {
  */
 router.put('/:id', async ctx => {
   const { id } = ctx.params
+  // @ts-ignore
   ctx.body = await updateUserController(Number(id), ctx.request.body)
 })
 
@@ -40,6 +41,7 @@ router.put('/:id', async ctx => {
  */
 router.post('/role/:id', async ctx => {
   const { id } = ctx.params
+  // @ts-ignore
   const { roles } = ctx.request.body
   ctx.body = await allocUserRoleController(Number(id), roles)
 })

@@ -16,6 +16,7 @@ const router = new Router({
 */
 
 router.post('/', async ctx => {
+  // @ts-ignore
   ctx.body = await addRoleController(ctx.request.body)
 })
 
@@ -37,6 +38,7 @@ router.get('/', async ctx => {
 */
 router.put('/:id', async ctx => {
   const { id } = ctx.params
+  // @ts-ignore
   ctx.body = await updateRoleController(Number(id), ctx.request.body)
 })
 

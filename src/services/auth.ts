@@ -3,7 +3,6 @@ import { UserWhereProps } from './types'
 import { createMd5 } from '../utils/createMD5'
 import { RolesModel, UserRoleModel } from '../db/models'
 import { UserInfo } from './types'
-import { Sequelize } from 'sequelize'
 
 /**
  * 创建用户
