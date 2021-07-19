@@ -1,13 +1,13 @@
 import Router from '@koa/router'
 import {
-    addRoleController,
-    getAllRoleController,
-    updateRoleController,
-    removeRoleController
+  addRoleController,
+  getAllRoleController,
+  updateRoleController,
+  removeRoleController
 } from '../controller/roles'
 
 const router = new Router({
-    prefix: '/api/role'
+  prefix: '/api/role'
 })
 
 /**
@@ -16,7 +16,7 @@ const router = new Router({
 */
 
 router.post('/', async ctx => {
-    ctx.body = await addRoleController(ctx.request.body)
+  ctx.body = await addRoleController(ctx.request.body)
 })
 
 /**
@@ -24,11 +24,11 @@ router.post('/', async ctx => {
 * get /api/role
 */
 router.get('/', async ctx => {
-    const { pageNum = 0, pageSize = 10 } = ctx.request.query
-    ctx.body = await getAllRoleController({
-        offset: Number(pageNum),
-        limit: Number(pageSize)
-    })
+  const { pageNum = 0, pageSize = 10 } = ctx.request.query
+  ctx.body = await getAllRoleController({
+    offset: Number(pageNum),
+    limit: Number(pageSize)
+  })
 })
 
 /**
@@ -36,8 +36,8 @@ router.get('/', async ctx => {
 * put /api/role/:id
 */
 router.put('/:id', async ctx => {
-    const { id } = ctx.params
-    ctx.body = await updateRoleController(Number(id), ctx.request.body)
+  const { id } = ctx.params
+  ctx.body = await updateRoleController(Number(id), ctx.request.body)
 })
 
 /**
@@ -45,8 +45,8 @@ router.put('/:id', async ctx => {
 * delete /api/role/:id
 */
 router.delete('/:id', async ctx => {
-    const { id } = ctx.params
-    ctx.body = await removeRoleController(Number(id))
+  const { id } = ctx.params
+  ctx.body = await removeRoleController(Number(id))
 })
 
 export default router

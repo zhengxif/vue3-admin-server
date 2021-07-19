@@ -1,13 +1,15 @@
 import Router from '@koa/router'
+import { File } from 'formidable'
 import {
-    getAllUserController,
-    updateUserController,
-    allocUserRoleController,
-    removeUserController
+  getAllUserController,
+  updateUserController,
+  allocUserRoleController,
+  removeUserController,
+  uploadAvatarController
 } from '../controller/user'
 
 const router = new Router({
-    prefix: '/api/user'
+  prefix: '/api/user'
 })
 
 /**
@@ -15,12 +17,12 @@ const router = new Router({
  * get /api/user
  */
 router.get('/', async ctx => {
-    const { pageNum = 0, pageSize = 10, ...query } = ctx.request.query
-    ctx.body = await getAllUserController({
-        offset: Number(pageNum),
-        limit: Number(pageSize),
-        query
-    })
+  const { pageNum = 0, pageSize = 10, ...query } = ctx.request.query
+  ctx.body = await getAllUserController({
+    offset: Number(pageNum),
+    limit: Number(pageSize),
+    query
+  })
 })
 
 /**
@@ -28,8 +30,8 @@ router.get('/', async ctx => {
  * post /api/user/:id
  */
 router.put('/:id', async ctx => {
-    const { id } = ctx.params
-    ctx.body = await updateUserController(Number(id), ctx.request.body)
+  const { id } = ctx.params
+  ctx.body = await updateUserController(Number(id), ctx.request.body)
 })
 
 /**
@@ -37,9 +39,9 @@ router.put('/:id', async ctx => {
  * post /api/user/role/:id
  */
 router.post('/role/:id', async ctx => {
-    const { id } = ctx.params
-    const { roles } = ctx.request.body
-    ctx.body = await allocUserRoleController(Number(id), roles)
+  const { id } = ctx.params
+  const { roles } = ctx.request.body
+  ctx.body = await allocUserRoleController(Number(id), roles)
 })
 
 /**
@@ -47,8 +49,18 @@ router.post('/role/:id', async ctx => {
  * delete /api/user/:id
  */
 router.delete('/:id', async ctx => {
-    const { id } = ctx.params
-    ctx.body = await removeUserController(Number(id))
+  const { id } = ctx.params
+  ctx.body = await removeUserController(Number(id))
+})
+
+/**
+* 用户头像上传
+* post /api/user/upload
+*/
+router.post('/upload', async ctx => {
+  const file = ctx.request.files?.file
+  const tokenStr = ctx.request.headers.authorization as string
+  ctx.body = await uploadAvatarController(ctx.origin, file as File, tokenStr)
 })
 
 export default router

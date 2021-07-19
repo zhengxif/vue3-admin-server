@@ -1,14 +1,14 @@
 import Router from '@koa/router'
 import {
-    addAccessController,
-    getAccessAllController,
-    removeAccessController,
-    updateAccessController,
-    updateBulkAccessController
+  addAccessController,
+  getAccessAllController,
+  removeAccessController,
+  updateAccessController,
+  updateBulkAccessController
 } from '../controller/access'
 
 const router = new Router({
-    prefix: '/api/access'
+  prefix: '/api/access'
 })
 
 /**
@@ -16,15 +16,15 @@ const router = new Router({
 * post /api/access/menu
 */
 router.post('/menu', async (ctx) => {
-    ctx.body = await addAccessController(ctx.request.body)
+  ctx.body = await addAccessController(ctx.request.body)
 })
 
 /**
-* 获取菜单
+* 获取全部菜单
 * get /api/access/menu
 */
 router.get('/menus', async (ctx) => {
-    ctx.body = await getAccessAllController()
+  ctx.body = await getAccessAllController()
 })
 
 /**
@@ -32,8 +32,8 @@ router.get('/menus', async (ctx) => {
 * delete /api/access/menu
 */
 router.delete('/menu/:id', async (ctx) => {
-    const { id } = ctx.params
-    ctx.body = await removeAccessController(Number(id))
+  const { id } = ctx.params
+  ctx.body = await removeAccessController(Number(id))
 })
 
 /**
@@ -41,8 +41,8 @@ router.delete('/menu/:id', async (ctx) => {
 * put /api/access/menu/:id
 */
 router.put('/menu/:id', async (ctx) => {
-    const { id } = ctx.params
-    ctx.body = await updateAccessController(Number(id), ctx.request.body)
+  const { id } = ctx.params
+  ctx.body = await updateAccessController(Number(id), ctx.request.body)
 })
 
 /**
@@ -50,8 +50,8 @@ router.put('/menu/:id', async (ctx) => {
 * patch /api/access/menu/update
 */
 router.patch('/menu/update', async (ctx) => {
-    const { access } = ctx.request.body
-    ctx.body = await updateBulkAccessController(access)
+  const { access } = ctx.request.body
+  ctx.body = await updateBulkAccessController(access)
 })
 
 export default router

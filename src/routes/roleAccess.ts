@@ -1,12 +1,12 @@
 import Router from '@koa/router'
 import {
-    addRoleAccessController,
-    getRoleAccessController,
-    getAccessByRolesController
+  addRoleAccessController,
+  getRoleAccessController,
+  getAccessByRolesController
 } from '../controller/roleAccess'
 
 const router = new Router({
-    prefix: '/api/role_access'
+  prefix: '/api/role_access'
 })
 
 /**
@@ -14,9 +14,9 @@ const router = new Router({
 * post /api/role_access'
 */
 router.post('/:id', async ctx => {
-    const { id } = ctx.params
-    const { access } = ctx.request.body
-    ctx.body = await addRoleAccessController(Number(id), access)
+  const { id } = ctx.params
+  const { access } = ctx.request.body
+  ctx.body = await addRoleAccessController(Number(id), access)
 })
 
 /**
@@ -24,15 +24,15 @@ router.post('/:id', async ctx => {
 * post /api/role_access'
 */
 router.get('/:id', async ctx => {
-    const { id } = ctx.params
-    ctx.body = await getRoleAccessController(Number(id))
+  const { id } = ctx.params
+  ctx.body = await getRoleAccessController(Number(id))
 })
 
 router.post('/role/access', async ctx => {
-    const { roles } = ctx.request.body
-    const ids = (roles as string[]).map(Number)
-    ctx.body = await getAccessByRolesController(ids)
-    // ctx.body = typeof roles
+  const { roles } = ctx.request.body
+  const ids = (roles as string[]).map(Number)
+  ctx.body = await getAccessByRolesController(ids)
+  // ctx.body = typeof roles
 })
 
 export default router
